@@ -29,20 +29,39 @@ class BucketListViewController: UITableViewController, AddItemTableViewControlle
         cell.textLabel?.text = items[indexPath.row]
         return cell
     }
+    
+    // Know what cell has been clicked on
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "EditItemSegue", sender: indexPath)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddNewMission" {
+        if segue.identifier == "AddItemSegue" {
             let navigationController = segue.destination as! UINavigationController
             let addItemTableViewController = navigationController.topViewController as! AddItemTableViewController
             addItemTableViewController.delegate = self
+        } else if segue.identifier == "EditItemSegue" {
+            let navigationController = segue.destination as! UINavigationController
+            let addItemTableViewController = navigationController.topViewController as! AddItemTableViewController
+            addItemTableViewController.delegate = self
+            let indexPath = sender as! NSIndexPath
+            let item = items[indexPath.row]
+            addItemTableViewController.item = item
+            addItemTableViewController.indexPath = indexPath
         }
     }
     func cancelButtonPressed(by controller: AddItemTableViewController) {
         print("I'm the hidden controller, BUT I am responding to the cancel button press on the top view controller")
         dismiss(animated: true, completion: nil)
     }
-    func itemSaved(by controller: AddItemTableViewController, with text: String) {
+    func itemSaved(by controller: AddItemTableViewController, with text: String, at indexPath: NSIndexPath?) {
+        if let ip = indexPath {
+            items[ip.row] = text
+        } else {
+            items.append(text)
+        }
         print("Received text from Top View: \(text)")
-        items.append(text)
+        
         tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }
