@@ -35,13 +35,10 @@
                     <navigationItem key="navigationItem" id="XRV-u9-gaW">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="2bN-2g-Eou">
                             <connections>
-                                <segue destination="PkS-Xz-bUg" kind="presentation" identifier="AddItemSegue" id="6XW-WL-fJ7"/>
+                                <segue destination="PkS-Xz-bUg" kind="presentation" identifier="AddItemSegue" id="FdQ-NR-8Vn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="PkS-Xz-bUg" kind="presentation" identifier="EditItemSegue" id="XHa-Xf-oZT"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ldk-rL-s8r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -148,7 +145,4 @@
             <point key="canvasLocation" x="1055" y="-9"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="XHa-Xf-oZT"/>
-    </inferredMetricsTieBreakers>
 </document>

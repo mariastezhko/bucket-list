@@ -35,8 +35,11 @@ class BucketListViewController: UITableViewController, AddItemTableViewControlle
         print("Selected")
     }
     
+    
+    
+
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        performSegue(withIdentifier: "EditItemSegue", sender: indexPath)
+        performSegue(withIdentifier: "AddItemSegue", sender: indexPath)
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -45,14 +48,12 @@ class BucketListViewController: UITableViewController, AddItemTableViewControlle
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddItemSegue" {
-            let navigationController = segue.destination as! UINavigationController
-            let addItemTableViewController = navigationController.topViewController as! AddItemTableViewController
-            addItemTableViewController.delegate = self
-        } else if segue.identifier == "EditItemSegue" {
-            let navigationController = segue.destination as! UINavigationController
-            let addItemTableViewController = navigationController.topViewController as! AddItemTableViewController
-            addItemTableViewController.delegate = self
+        //if segue.identifier == "AddItemSegue" {
+        let navigationController = segue.destination as! UINavigationController
+        let addItemTableViewController = navigationController.topViewController as! AddItemTableViewController
+        addItemTableViewController.delegate = self
+        // If sender is a table cell (edit item), additionally pass the item and its location in the table
+        if (sender as? NSIndexPath) != nil {
             let indexPath = sender as! NSIndexPath
             let item = items[indexPath.row]
             addItemTableViewController.item = item
